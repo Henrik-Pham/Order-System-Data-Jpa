@@ -1,2 +1,9 @@
-package com.example.jpademo.customer;public interface CustomerRepo {
+package com.example.jpademo.customer;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface CustomerRepo extends JpaRepository<Customer, Long> {
+
 }
