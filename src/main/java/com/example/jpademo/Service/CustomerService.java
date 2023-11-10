@@ -1,8 +1,8 @@
-package com.example.jpademo.customer;
-
+package com.example.jpademo.Service;
 import com.example.jpademo.customer.Customer;
-import com.example.jpademo.customer.CustomerRepo;
+import com.example.jpademo.repository.CustomerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,14 +20,17 @@ public class CustomerService {
         return customerRepo.findAll();
     }
 
-    public Customer getCustomerById(Long id){
-        return customerRepo.findById(id).orElse(null);
+    public List<Customer> getCustomersPageable(int pageNumber){
+        return customerRepo.findAll(PageRequest.of(pageNumber, 10)).stream().toList();
     }
 
-    public Customer createCustomer(Customer customer){
+    public Customer addCustomer(Customer customer) {
         return customerRepo.save(customer);
     }
 
+    public Customer getCustomerById(Long id) {
+        return customerRepo.findById(id).orElse(null);
+    }
     public Customer updateCustomer(Customer customer){
         return customerRepo.save(customer);
     }
@@ -45,3 +48,21 @@ public class CustomerService {
         return null;
     }
 }
+
+/**
+ * @SpringBootTest good for integration test
+ * WebMvcTest good for testing controller
+ * DataJpaTest good for testing service
+
+ * Restful API
+ * Relationships
+ * Flyway??
+ * H2 Database
+ * Data JPA
+ * at least 4 different entities
+ * Business logic
+ * CI/CD
+ * Github deployment
+ * Wiseflow (link to repo, link to running code)
+ * Test, Integration test, service test, unit test
+ * **/

@@ -2,28 +2,33 @@ package com.example.jpademo.order;
 
 import com.example.jpademo.Item.Item;
 import com.example.jpademo.customer.Customer;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
+import java.util.ArrayList;
 import java.util.List;
+
 
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
+@ToString
+@Table(name = "orders")
 public class Order {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long orderId;
+    @GeneratedValue(generator = "order_generator")
+    @SequenceGenerator(name = "order_generator", sequenceName = "order_seq", initialValue = 1, allocationSize = 1)
+    @Column(name = "order_id")
+    private Long orderId = 0L;
 
     @ManyToOne
+    @JoinColumn(name = "customer_id")
+    @JsonIgnoreProperties("orders")
     private Customer customer;
 
-    @ManyToMany
-    @JoinTable(name = "order_items",
-            joinColumns = @JoinColumn(name = "order_id"),
-            inverseJoinColumns = @JoinColumn(name = "item_id"))
-    private List<Item> items;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Item> items = new ArrayList<>();
 }

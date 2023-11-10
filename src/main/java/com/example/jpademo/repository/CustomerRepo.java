@@ -1,5 +1,6 @@
-package com.example.jpademo.customer;
+package com.example.jpademo.repository;
 
+import com.example.jpademo.customer.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

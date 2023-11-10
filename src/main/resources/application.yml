@@ -6,6 +6,10 @@ spring:
     driverClassName: org.h2.Driver
     generate-unique-name: false
     name: parts
+
   h2:
     console:
       enabled: true
+
+  jpa:
+    show-sql: true
