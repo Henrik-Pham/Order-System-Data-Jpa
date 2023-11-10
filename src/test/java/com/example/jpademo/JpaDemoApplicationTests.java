@@ -53,8 +53,8 @@ class JpaDemoApplicationTests {
         order2.getItems().add(piston);
         order2.getItems().add(cog);
 
-        customer.getOrders().add(order1);
-        customer.getOrders().add(order2);
+        //customer.getOrders().add(order1);
+        //customer.getOrders().add(order2);
         Customer c = customerRepo.save(customer);
         assert c.getOrders().size() == 2;
         assert c.getOrders().get(0).getItems().size() == 2;
